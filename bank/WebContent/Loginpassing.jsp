@@ -3,7 +3,7 @@
 	</head>
 	<body>
 
-<%@ page language="java" import = "java.sql.*,java.net.*,java.io.*" contentType="text/html; charset=UTF-8"
+<%@ page language="java" import = "java.util.Date,java.sql.*,java.net.*,java.io.*" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 	<%
 	request.setCharacterEncoding("UTF-8");
@@ -22,6 +22,21 @@
 	dis.close();
 	fis.close();
 	if(id.equals(reqid) && pass.equals(reqpass)){
+		Date now = new Date();
+		String year = String.valueOf(now.getYear());
+		String month = String.valueOf(now.getMonth()+1);
+		String date =  String.valueOf(now.getDate());
+		String hour = String.valueOf (now.getHours());
+		String min =  String.valueOf(now.getMinutes());
+		String sec =  String.valueOf(now.getSeconds());
+		FileWriter bw = new FileWriter("c:/bankuser/"+id+"_log.txt",true);
+		PrintWriter pw = new PrintWriter(bw,true);
+		
+		pw.write(year+month+date+hour+min+sec+"\r\n");
+		
+		pw.close();
+		bw.close();
+		
 		session.setAttribute("id",id);
 		%>
 		<jsp:forward page="User_main.jsp"/>
