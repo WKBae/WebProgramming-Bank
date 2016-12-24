@@ -18,7 +18,7 @@
         <input type="submit" value="입금">
     </form>
     <br>
-    <form name="form2" method="post" action="logout_passing.jsp">
+    <form name="form2" method="post" action="do_logout.jsp">
         <input type="submit" value="출금">
     </form>
     <br>

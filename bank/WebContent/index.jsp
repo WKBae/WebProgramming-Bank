@@ -14,7 +14,7 @@
 </head>
 <body>
     <h1>계좌 관리시스템</h1>
-    <form name="form1" method="post" action="Loginpassing.jsp">
+    <form name="form1" method="post" action="do_login.jsp">
         <p>아이디 : <input type="text" name="id" maxlength="10"></p>
         <p>비밀번호 : <input type="password" name="pass" maxlength="10"></p>
         <p><input type="submit" value="로그인"></p>

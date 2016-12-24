@@ -17,7 +17,7 @@
         <input type="submit" value="정보수정">
     </form>
     <br>
-    <form name="form2" method="post" action="logout_passing.jsp">
+    <form name="form2" method="post" action="do_logout.jsp">
         <input type="submit" value="로그아웃">
     </form>
     <br>
