@@ -19,8 +19,22 @@
 		FileOutputStream fos = new FileOutputStream(f);
 		DataOutputStream dos = new DataOutputStream( fos );
 		
+		dos.writeUTF(name);
+		dos.writeUTF(id);
+		dos.writeUTF(pass);
+		dos.writeUTF(accountnum);
+		dos.writeUTF("\r\n");
+		dos.close();
+		fos.close();
+		
+		
 		FileWriter bw = new FileWriter("c:/bankuser/user.txt",true);
 		PrintWriter pw = new PrintWriter(bw,true);
+		
+		pw.write(id + "\r\n");
+		bw.close();
+		pw.close();
+		
 		
 		Date now = new Date();
 		String year = String.valueOf(now.getYear());
@@ -31,26 +45,14 @@
 		String sec =  String.valueOf(now.getSeconds());
 		
 		FileWriter bw2 = new FileWriter("c:/bankuser/"+id+"_account.txt",true);
-		PrintWriter pw2 = new PrintWriter(bw,true);
+		PrintWriter pw2 = new PrintWriter(bw2,true);
 		
 		
-		pw2.write(year+month+date+hour+min+sec+"     ");
+		pw2.write(year+month+date+hour+min+sec+"\t");
 		pw2.write("100000"+"\r\n");
 		pw2.close();
 		bw2.close();
 		
-		pw.write(id + "\r\n");
-		bw.close();
-		pw.close();
-		
-		
-		dos.writeUTF(name);
-		dos.writeUTF(id);
-		dos.writeUTF(pass);
-		dos.writeUTF(accountnum);
-		dos.writeUTF("\r\n");
-		dos.close();
-		fos.close();
 		}
 		else{
 			%>
