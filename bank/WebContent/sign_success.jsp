@@ -61,7 +61,7 @@
             bw2.close();
 
         } else { %>
-    <jsp:forward page="sign.jsp"/>
+    <jsp:forward page="signup.jsp"/>
     <% } %>
 
     회원가입에 성공하셨습니다.

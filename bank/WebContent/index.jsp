@@ -19,7 +19,7 @@
         <p>비밀번호 : <input type="password" name="pass" maxlength="10"></p>
         <p><input type="submit" value="로그인"></p>
     </form>
-    <a href="sign.jsp">회원가입</a>
+    <a href="signup.jsp">회원가입</a>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
