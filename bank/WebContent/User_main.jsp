@@ -13,21 +13,23 @@
     <![endif]-->
 </head>
 <body>
-    <form name="form1" method="post" action="rewrite.jsp">
-        <input type="submit" value="정보수정">
-    </form>
-    <br>
-    <form name="form2" method="post" action="do_logout.jsp">
-        <input type="submit" value="로그아웃">
-    </form>
-    <br>
-    <form name="form1" method="post" action="exit.jsp">
-        <input type="submit" value="회원탈퇴">
-    </form>
-    <br>
-    <form name="form1" method="post" action="bank_use.jsp">
-        <input type="submit" value="은행이용">
-    </form>
+    <div class="container" role="main">
+        <form name="form1" method="get" action="rewrite.jsp">
+            <input type="submit" class="btn btn-default" value="정보수정">
+        </form>
+        <br>
+        <form name="form2" method="get" action="do_logout.jsp">
+            <input type="submit" class="btn btn-default" value="로그아웃">
+        </form>
+        <br>
+        <form name="form1" method="get" action="exit.jsp">
+            <input type="submit" class="btn btn-default" value="회원탈퇴">
+        </form>
+        <br>
+        <form name="form1" method="get" action="bank_use.jsp">
+            <input type="submit" class="btn btn-default" value="은행이용">
+        </form>
+    </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

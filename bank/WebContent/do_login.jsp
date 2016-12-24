@@ -18,6 +18,7 @@
         request.setCharacterEncoding("UTF-8");
         String reqid = request.getParameter("id");
         String reqpass = request.getParameter("pass");
+    <div class="container" role="main">
 
         File file = new File("c:/bankuser/" + reqid + ".txt");
 
@@ -56,6 +57,8 @@
         } else { %>
             <a href="index.jsp">로그인 실패</a>
     <%  } %>
+    </div>
+
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->

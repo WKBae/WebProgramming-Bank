@@ -13,14 +13,21 @@
     <![endif]-->
 </head>
 <body>
-    <h1>계좌 관리시스템</h1>
-    <form name="form1" method="post" action="do_login.jsp">
-        <p>아이디 : <input type="text" name="id" maxlength="10"></p>
-        <p>비밀번호 : <input type="password" name="pass" maxlength="10"></p>
-        <p><input type="submit" value="로그인"></p>
-    </form>
-    <a href="signup.jsp">회원가입</a>
-
+    <div class="container" role="main">
+        <h1>계좌 관리시스템</h1>
+        <form name="form1" method="post" action="do_login.jsp">
+            <div class="form-group">
+                <label for="id">아이디</label>
+                <input type="text" class="form-control" id="id" name="id" maxlength="10" placeholder="아이디">
+            </div>
+            <div class="form-group">
+                <label for="pass">비밀번호</label>
+                <input type="password" class="form-control" id="pass" name="pass" maxlength="10" placeholder="비밀번호">
+            </div>
+            <button type="submit" class="btn btn-primary">로그인</button>
+        </form>
+        <a href="signup.jsp">회원가입</a>
+    </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->

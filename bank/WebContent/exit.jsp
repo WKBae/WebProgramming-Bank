@@ -13,13 +13,15 @@
     <![endif]-->
 </head>
 <body>
-    정말로 회원탈퇴를 하시겠습니까?
-    <form method="post" action="exit_complete.jsp">
-        <input type="submit" value="예">
-    </form>
-    <form method="post" action="User_main.jsp">
-        <input type="submit" value="아니오">
-    </form>
+    <div class="container" role="main">
+        정말로 회원탈퇴를 하시겠습니까?
+        <form method="get" action="exit_complete.jsp">
+            <input type="submit" class="btn btn-primary" value="예">
+        </form>
+        <form method="get" action="user_main.jsp">
+            <input type="submit" class="btn btn-default" value="아니오">
+        </form>
+    </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

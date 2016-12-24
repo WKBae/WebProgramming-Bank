@@ -14,17 +14,19 @@
     <![endif]-->
 </head>
 <body>
-    <form name="form1" method="post" action="rewrite.jsp">
-        <input type="submit" value="입금">
-    </form>
-    <br>
-    <form name="form2" method="post" action="do_logout.jsp">
-        <input type="submit" value="출금">
-    </form>
-    <br>
-    <form name="form1" method="post" action="exit.jsp">
-        <input type="submit" value="잔액조회">
-    </form>
+    <div class="container" role="main">
+        <form name="form1" method="post" action="rewrite.jsp">
+            <input type="submit" class="btn btn-default" value="입금">
+        </form>
+        <br>
+        <form name="form2" method="post" action="do_logout.jsp">
+            <input type="submit" class="btn btn-default" value="출금">
+        </form>
+        <br>
+        <form name="form1" method="post" action="exit.jsp">
+            <input type="submit" class="btn btn-default" value="잔액조회">
+        </form>
+    </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

@@ -64,10 +64,12 @@
     <jsp:forward page="signup.jsp"/>
     <% } %>
 
-    회원가입에 성공하셨습니다.
-    <form name="form1" method="post" action="index.jsp">
-        <input type="submit" value="return home">
-    </form>
+    <div class="container" role="main">
+        회원가입에 성공하셨습니다.
+        <form name="form1" method="post" action="index.jsp">
+            <input type="submit" class="btn btn-default" value="return home">
+        </form>
+    </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

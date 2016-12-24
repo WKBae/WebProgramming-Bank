@@ -37,10 +37,13 @@
         dos.close();
         fos.close();
     %>
-    회원정보를 수정하였습니다.
-    <form name="form1" method="post" action="index.jsp">
-        <input type="submit" value="return home">
-    </form>
+
+    <div class="container" role="main">
+        회원정보를 수정하였습니다.
+        <form name="form1" method="post" action="index.jsp">
+            <input type="submit" class="btn btn-primary" value="return home">
+        </form>
+    </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

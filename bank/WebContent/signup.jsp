@@ -13,15 +13,31 @@
     <![endif]-->
 </head>
 <body>
-    <h1>회원정보</h1>
-    <form name="form1" method="post" action="sign_success.jsp">
-        <p>이름 : <input type="text" name="name" maxlength="10"></p>
-        <p>아이디 : <input type="text" name="id" maxlength="10"></p>
-        <p>비밀번호 : <input type="password" name="pass" maxlength="10"></p>
-        <p>계좌 : <input type="text" name="accountnum" maxlength="10"></p>
-        <p>(기타 이메일 등 개인정보는 안받겠습니다)</p>
-        <p><input type="submit" value="완료"></p>
-    </form>
+    <div class="container" role="main">
+        <h1>회원 정보</h1>
+        <form name="form1" method="post" action="sign_success.jsp">
+            <div class="form-group">
+                <label for="name">이름</label>
+                <input type="text" class="form-control" id="name" name="name" maxlength="10" placeholder="이름">
+            </div>
+            <div class="form-group">
+                <label for="id">아이디</label>
+                <input type="text" class="form-control" id="id" name="id" maxlength="10" placeholder="아이디">
+            </div>
+            <div class="form-group">
+                <label for="pass">비밀번호</label>
+                <input type="password" class="form-control" id="pass" name="pass" maxlength="10" placeholder="비밀번호">
+            </div>
+            <div class="form-group">
+                <label for="accountnum">계좌</label>
+                <input type="text" class="form-control" id="accountnum" name="accountnum" maxlength="10" placeholder="계좌">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">완료</button>
+                <p class="help-block">(기타 이메일 등 개인정보는 받지 않습니다.)</p>
+            </div>
+        </form>
+    </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
