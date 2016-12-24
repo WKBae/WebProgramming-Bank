@@ -22,20 +22,18 @@
         String pass = request.getParameter("pass");
         String accountnum = request.getParameter("accountnum");
 
-        FileOutputStream fos = new FileOutputStream("c:/bankuser/" + id + ".txt");
-        DataOutputStream dos = new DataOutputStream(fos);
+        try (FileOutputStream fos = new FileOutputStream("c:/bankuser/" + id + ".txt");
+             DataOutputStream dos = new DataOutputStream(fos)) {
 
 
-        dos.writeUTF(name);
-        dos.writeUTF(id);
-        dos.writeUTF(pass);
-        dos.writeUTF(accountnum);
-        fos.write('\n');
+            dos.writeUTF(name);
+            dos.writeUTF(id);
+            dos.writeUTF(pass);
+            dos.writeUTF(accountnum);
+            fos.write('\n');
 
-        session.removeAttribute("id");
-
-        dos.close();
-        fos.close();
+            session.removeAttribute("id");
+        }
     %>
 
     <div class="container" role="main">

@@ -14,49 +14,45 @@
     <![endif]-->
 </head>
 <body>
-    <%
-        request.setCharacterEncoding("UTF-8");
-        String reqid = request.getParameter("id");
-        String reqpass = request.getParameter("pass");
     <div class="container" role="main">
+        <%
+            request.setCharacterEncoding("UTF-8");
+            String reqid = request.getParameter("id");
+            String reqpass = request.getParameter("pass");
 
-        File file = new File("c:/bankuser/" + reqid + ".txt");
+            File file = new File("c:/bankuser/" + reqid + ".txt");
 
-        if(file.isFile()) {
-            FileInputStream fis = new FileInputStream(file);
-            DataInputStream dis = new DataInputStream(fis);
+            if(file.isFile()) {
+                try (FileInputStream fis = new FileInputStream(file);
+                     DataInputStream dis = new DataInputStream(fis)) {
 
-            String name = dis.readUTF();
-            String id = dis.readUTF();
-            String pass = dis.readUTF();
-            dis.close();
-            fis.close();
-            if(id.equals(reqid) && pass.equals(reqpass)) {
-                Calendar cal = Calendar.getInstance();
-                String year = String.valueOf(cal.get(Calendar.YEAR));
-                String month = String.valueOf(cal.get(Calendar.MONTH) + 1);
-                String date = String.valueOf(cal.get(Calendar.DATE));
-                String hour = String.valueOf(cal.get(Calendar.HOUR_OF_DAY));
-                String min = String.valueOf(cal.get(Calendar.MINUTE));
-                String sec = String.valueOf(cal.get(Calendar.SECOND));
-                FileWriter bw = new FileWriter("c:/bankuser/" + id + "_log.txt", true);
-                PrintWriter pw = new PrintWriter(bw, true);
+                    String name = dis.readUTF();
+                    String id = dis.readUTF();
+                    String pass = dis.readUTF();
 
-                pw.write(year + month + date + hour + min + sec + "\r\n");
+                    if(id.equals(reqid) && pass.equals(reqpass)) {
+                        Calendar cal = Calendar.getInstance();
+                        String year = String.valueOf(cal.get(Calendar.YEAR));
+                        String month = String.valueOf(cal.get(Calendar.MONTH) + 1);
+                        String date = String.valueOf(cal.get(Calendar.DATE));
+                        String hour = String.valueOf(cal.get(Calendar.HOUR_OF_DAY));
+                        String min = String.valueOf(cal.get(Calendar.MINUTE));
+                        String sec = String.valueOf(cal.get(Calendar.SECOND));
+                        try (FileWriter bw = new FileWriter("c:/bankuser/" + id + "_log.txt", true);
+                             PrintWriter pw = new PrintWriter(bw, true)) {
+                            pw.write(year + month + date + hour + min + sec + "\r\n");
+                        }
 
-                pw.close();
-                bw.close();
-
-                session.setAttribute("id", id);
-    %>
-                <jsp:forward page="User_main.jsp"/>
-
-    <%      } else { %>
+                        session.setAttribute("id", id);
+        %>
+                        <jsp:forward page="user_main.jsp"/>
+        <%          } else { %>
+                        <a href="index.jsp">로그인 실패</a>
+        <%          }
+                }
+            } else { %>
                 <a href="index.jsp">로그인 실패</a>
-    <%      }
-        } else { %>
-            <a href="index.jsp">로그인 실패</a>
-    <%  } %>
+        <%  } %>
     </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
