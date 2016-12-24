@@ -27,8 +27,8 @@
                         <input type="password" class="form-control" id="pass" name="pass" maxlength="10" placeholder="비밀번호">
                     </div>
                     <button type="submit" class="btn btn-primary">로그인</button>
+                    <a class="btn btn-link" href="signup.jsp">회원가입</a>
                 </form>
-                <a href="signup.jsp">회원가입</a>
             </div>
         </div>
     </div>
