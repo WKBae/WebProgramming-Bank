@@ -45,6 +45,7 @@
 
                         session.setAttribute("id", id);
         %>
+                <!-- TODO jsp:foward로 하면 주소창에 user_main.jsp가 아니라 do_login.jsp로 남아있음 -->
                         <jsp:forward page="user_main.jsp"/>
         <%          } else { %>
                         <a href="index.jsp">로그인 실패</a>
