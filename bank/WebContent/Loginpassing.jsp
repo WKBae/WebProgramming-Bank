@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.io.*,java.util.Date" contentType="text/html; charset=UTF-8"
+<%@ page language="java" import="java.io.*,java.util.Calendar" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="kr">
@@ -31,13 +31,13 @@
             dis.close();
             fis.close();
             if(id.equals(reqid) && pass.equals(reqpass)) {
-                Date now = new Date();
-                String year = String.valueOf(now.getYear());
-                String month = String.valueOf(now.getMonth() + 1);
-                String date = String.valueOf(now.getDate());
-                String hour = String.valueOf(now.getHours());
-                String min = String.valueOf(now.getMinutes());
-                String sec = String.valueOf(now.getSeconds());
+                Calendar cal = Calendar.getInstance();
+                String year = String.valueOf(cal.get(Calendar.YEAR));
+                String month = String.valueOf(cal.get(Calendar.MONTH) + 1);
+                String date = String.valueOf(cal.get(Calendar.DATE));
+                String hour = String.valueOf(cal.get(Calendar.HOUR_OF_DAY));
+                String min = String.valueOf(cal.get(Calendar.MINUTE));
+                String sec = String.valueOf(cal.get(Calendar.SECOND));
                 FileWriter bw = new FileWriter("c:/bankuser/" + id + "_log.txt", true);
                 PrintWriter pw = new PrintWriter(bw, true);
 
