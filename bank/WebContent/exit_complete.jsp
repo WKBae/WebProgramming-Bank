@@ -3,9 +3,10 @@
     String delid = (String) session.getAttribute("id");
     File f = new File("c:/bankuser/" + delid + ".txt");
     File f_log = new File("c:/bankuser/" + delid + "_log.txt");
-    File user = new File("c:/bankuser/user.txt");
+    File f_account = new File("c:/bankuser/" + delid + "_account.txt");
     f.delete();
     f_log.delete();
+    f_account.delete();
     session.removeAttribute("id");
 %>
 <jsp:forward page="index.jsp"/>

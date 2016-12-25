@@ -18,7 +18,7 @@
     <%
         request.setCharacterEncoding("UTF-8");
         String name = request.getParameter("name");
-        String id = request.getParameter("id"); // TODO id를 request가 아니라 session에서 받아오기
+        String id = (String) session.getAttribute("id");
         String pass = request.getParameter("pass");
         String accountnum = request.getParameter("accountnum");
 
