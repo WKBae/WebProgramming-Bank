@@ -35,9 +35,6 @@
 	int account_year;
 	int account_month;
 	int account_day;
-	int account_hour;
-	int account_min;
-	int account_sec;
 	
 	
 	FileReader fr = new FileReader("C:/bankuser/"+id+"_account.txt");
@@ -58,11 +55,8 @@
 		account_year=Integer.parseInt(account_date.substring(0,3));
 		account_month=Integer.parseInt(account_date.substring(4,5))-1;
 		account_day=Integer.parseInt(account_date.substring(6,7));
-		account_hour=Integer.parseInt(account_date.substring(8,9));
-		account_min=Integer.parseInt(account_date.substring(10,11));
-		account_sec=Integer.parseInt(account_date.substring(12,13));
 		
-		cal2.set(account_year, account_month, account_day, account_hour, account_min, account_sec);
+		cal2.set(account_year, account_month, account_day);
 		
 		Calendar temp= Calendar.getInstance();
 		temp.setTime(cal2.getTime());
