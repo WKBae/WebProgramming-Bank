@@ -22,7 +22,7 @@ public class DoDepositServlet extends HttpServlet {
 		try {
 			in_money = Integer.parseInt(input_money);
 		} catch(NumberFormatException e) {
-			response.sendRedirect("/deposit/failed.jsp?type=1");
+			response.sendRedirect("failed.jsp?type=1");
 			return;
 		}
 		
@@ -68,10 +68,10 @@ public class DoDepositServlet extends HttpServlet {
 		}
 		
 		//request.getRequestDispatcher("/WEB-INF/jsp/deposit_result.jsp").forward(request, response);
-		response.sendRedirect("/deposit/success.jsp");
+		response.sendRedirect("success.jsp");
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect("/deposit/deposit.jsp");
+		response.sendRedirect("deposit.jsp");
 	}
 }

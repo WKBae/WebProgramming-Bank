@@ -15,7 +15,7 @@ import java.util.Calendar;
 public class DoLogoutServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getSession().removeAttribute("id");
-		response.sendRedirect("/index.jsp");
+		response.sendRedirect("index.jsp");
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
