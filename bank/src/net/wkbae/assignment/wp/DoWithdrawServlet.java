@@ -76,6 +76,6 @@ public class DoWithdrawServlet extends HttpServlet {
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect("index.jsp");
+		response.sendRedirect("/index.jsp");
 	}
 }
