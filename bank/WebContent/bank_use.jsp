@@ -17,15 +17,15 @@
     <div class="container" role="main">
         <div class="row">
             <div class="col-xs-offset-1 col-xs-10 col-sm-offset-2 col-sm-8 col-md-offset-4 col-md-4">
-                <form name="form1" method="post" action="rewrite.jsp">
+                <form name="form1" method="post" action="deposit.jsp">
                     <input type="submit" class="btn btn-default" value="입금">
                 </form>
                 <br>
-                <form name="form2" method="post" action="do_logout.jsp">
+                <form name="form2" method="post" action="withdraw.jsp">
                     <input type="submit" class="btn btn-default" value="출금">
                 </form>
                 <br>
-                <form name="form1" method="post" action="exit.jsp">
+                <form name="form1" method="post" action="balance_check.jsp">
                     <input type="submit" class="btn btn-default" value="잔액조회">
                 </form>
             </div>
