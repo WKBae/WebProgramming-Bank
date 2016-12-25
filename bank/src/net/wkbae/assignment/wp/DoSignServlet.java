@@ -60,13 +60,13 @@ public class DoSignServlet extends HttpServlet {
 				pw2.write("100000\t가입을 축하드립니다.\r\n");
 			}
 			
-			response.sendRedirect("/sign/success.jsp");
+			response.sendRedirect("success.jsp");
 		} else {
-			response.sendRedirect("/sign/signup.jsp");
+			response.sendRedirect("signup.jsp");
 		}
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect("/index.jsp");
+		response.sendRedirect("../index.jsp");
 	}
 }

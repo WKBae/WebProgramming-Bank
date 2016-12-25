@@ -53,16 +53,16 @@ public class DoLoginServlet extends HttpServlet {
 					
 					request.getSession().setAttribute("id", id);
 					
-					response.sendRedirect("/user_main.jsp");
+					response.sendRedirect("user_main.jsp");
 					return;
 				}
 			}
 		}
 		//request.getRequestDispatcher("/login_failed.jsp").forward(request, response);
-		response.sendRedirect("/login_failed.jsp");
+		response.sendRedirect("login_failed.jsp");
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect("/index.jsp");
+		response.sendRedirect("index.jsp");
 	}
 }

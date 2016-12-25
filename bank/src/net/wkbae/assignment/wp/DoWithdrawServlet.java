@@ -22,7 +22,7 @@ public class DoWithdrawServlet extends HttpServlet {
 		try {
 			out_money = Integer.parseInt(output_money);
 		} catch(NumberFormatException e) {
-			response.sendRedirect("/withdraw/failed.jsp?type=1"); // type 1, output_money가 숫자가 아님
+			response.sendRedirect("failed.jsp?type=1"); // type 1, output_money가 숫자가 아님
 			return;
 		}
 		
@@ -42,7 +42,7 @@ public class DoWithdrawServlet extends HttpServlet {
 		}
 		
 		if((integer_money - out_money) < 0) {
-			response.sendRedirect("/withdraw/failed.jsp?type=2"); // type 2, 잔액 부족
+			response.sendRedirect("failed.jsp?type=2"); // type 2, 잔액 부족
 		} else {
 			Calendar cal = Calendar.getInstance();
 			String year = String.valueOf(cal.get(Calendar.YEAR));
@@ -71,11 +71,11 @@ public class DoWithdrawServlet extends HttpServlet {
 			
 			//request.setAttribute("remaining", integer_money - out_money);
 			//request.getRequestDispatcher("/WEB-INF/jsp/success.jsp").forward(request, response);
-			response.sendRedirect("/withdraw/success.jsp");
+			response.sendRedirect("success.jsp");
 		}
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect("/index.jsp");
+		response.sendRedirect("../index.jsp");
 	}
 }
