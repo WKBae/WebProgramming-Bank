@@ -8,7 +8,6 @@
     f_log.delete();
     f_account.delete();
     session.removeAttribute("id");
+
+    response.sendRedirect("index.jsp");
 %>
-<script type="text/javascript">
-               location.href="index.jsp";
-               </script>

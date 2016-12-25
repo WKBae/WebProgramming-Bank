@@ -1,5 +1,50 @@
 <%@ page language="java" import="java.io.*,java.util.Calendar" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
+<%
+    request.setCharacterEncoding("UTF-8");
+    String reqid = request.getParameter("id");
+    String reqpass = request.getParameter("pass");
+
+    File file = new File("c:/bankuser/" + reqid + ".txt");
+
+    if(file.isFile()) {
+        try(FileInputStream fis = new FileInputStream(file);
+            DataInputStream dis = new DataInputStream(fis)) {
+
+            String name = dis.readUTF();
+            String id = dis.readUTF();
+            String pass = dis.readUTF();
+
+            if(id.equals(reqid) && pass.equals(reqpass)) {
+                Calendar cal = Calendar.getInstance();
+                String year = String.valueOf(cal.get(Calendar.YEAR));
+                String month = String.valueOf(cal.get(Calendar.MONTH) + 1);
+                if(month.length() == 1)
+                    month = "0" + month;
+                String date = String.valueOf(cal.get(Calendar.DATE));
+                if(date.length() == 1)
+                    date = "0" + date;
+                String hour = String.valueOf(cal.get(Calendar.HOUR_OF_DAY));
+                if(hour.length() == 1)
+                    hour = "0" + hour;
+                String min = String.valueOf(cal.get(Calendar.MINUTE));
+                if(min.length() == 1)
+                    min = "0" + min;
+                String sec = String.valueOf(cal.get(Calendar.SECOND));
+                if(sec.length() == 1)
+                    sec = "0" + sec;
+                try(FileWriter bw = new FileWriter("c:/bankuser/" + id + "_log.txt", true);
+                    PrintWriter pw = new PrintWriter(bw, true)) {
+                    pw.write(year + month + date + hour + min + sec + "\r\n");
+                }
+
+                session.setAttribute("id", id);
+
+                response.sendRedirect("user_main.jsp");
+            }
+        }
+    } // else
+%>
 <!DOCTYPE html>
 <html lang="kr">
 <head>
@@ -15,58 +60,7 @@
 </head>
 <body>
     <div class="container" role="main">
-        <%
-            request.setCharacterEncoding("UTF-8");
-            String reqid = request.getParameter("id");
-            String reqpass = request.getParameter("pass");
-
-            File file = new File("c:/bankuser/" + reqid + ".txt");
-
-            if(file.isFile()) {
-                try (FileInputStream fis = new FileInputStream(file);
-                     DataInputStream dis = new DataInputStream(fis)) {
-
-                    String name = dis.readUTF();
-                    String id = dis.readUTF();
-                    String pass = dis.readUTF();
-
-                    if(id.equals(reqid) && pass.equals(reqpass)) {
-                        Calendar cal = Calendar.getInstance();
-                        String year = String.valueOf(cal.get(Calendar.YEAR));
-                        String month = String.valueOf(cal.get(Calendar.MONTH) + 1);
-                        if(month.length()==1)
-                        	month="0"+month;
-                        String date = String.valueOf(cal.get(Calendar.DATE));
-                        if(date.length()==1)
-                        	date="0"+date;
-                        String hour = String.valueOf(cal.get(Calendar.HOUR_OF_DAY));
-                        if(hour.length()==1)
-                        	hour="0"+hour;
-                        String min = String.valueOf(cal.get(Calendar.MINUTE));
-                        if(min.length()==1)
-                        	min="0"+min;
-                        String sec = String.valueOf(cal.get(Calendar.SECOND));
-                        if(sec.length()==1)
-                        	sec="0"+sec;
-                        try (FileWriter bw = new FileWriter("c:/bankuser/" + id + "_log.txt", true);
-                             PrintWriter pw = new PrintWriter(bw, true)) {
-                            pw.write(year + month + date + hour + min + sec + "\r\n");
-                        }
-
-                        session.setAttribute("id", id);
-        
-        %>
-               <script type="text/javascript">
-               location.href="user_main.jsp";
-               </script>
-                      <% 
-         } else { %>
-                        <a href="index.jsp">로그인 실패</a>
-        <%          }
-                }
-            } else { %>
-                <a href="index.jsp">로그인 실패</a>
-        <%  } %>
+        <a href="index.jsp">로그인 실패</a>
     </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
