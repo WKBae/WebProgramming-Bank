@@ -48,11 +48,13 @@
             try (FileWriter bw2 = new FileWriter("c:/bankuser/" + id + "_account.txt", true);
                  PrintWriter pw2 = new PrintWriter(bw2, true)) {
                 pw2.write(year + month + date + hour + min + sec + "\t");
-                pw2.write("100000" + "\r\n");
+                pw2.write("100000" +"\t"+"가입을 축하드립니다" +"\r\n");
             }
 
         } else { %>
-            <jsp:forward page="signup.jsp"/>
+            <script type="text/javascript">
+               location.href="signup.jsp";
+               </script>
     <%  } %>
 
     <div class="container" role="main">

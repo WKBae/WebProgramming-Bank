@@ -2,4 +2,6 @@
 <%
     session.removeAttribute("id");
 %>
-<jsp:forward page="index.jsp"/>
+<script type="text/javascript">
+               location.href="index.jsp";
+               </script>

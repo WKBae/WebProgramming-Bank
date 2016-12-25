@@ -38,8 +38,17 @@ try (FileWriter bw = new FileWriter("c:/bankuser/" + id + "_account.txt", true);
      PrintWriter pw = new PrintWriter(bw, true)) {
 	
     pw.write(year + month + date + hour + min + sec + "\t");
-    pw.write((Integer.parseInt(input_money)+integer_money) + "\r\n");
+    pw.write((Integer.parseInt(input_money)+integer_money) + "\t" + "입금:" +(Integer.parseInt(input_money)) + "\r\n");
 }
 %>
+입금 완료
+<br>
+현재 잔액 : 
+<%
+out.print(Integer.parseInt(input_money)+integer_money + "원");
+%>
+<form action = "user_main.jsp" method=post>
+<input type="submit" value="return home">
+</form>
 </body>
 </html>
