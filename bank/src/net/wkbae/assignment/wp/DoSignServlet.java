@@ -57,7 +57,7 @@ public class DoSignServlet extends HttpServlet {
 			try(FileWriter bw2 = new FileWriter("c:/bankuser/" + id + "_account.txt", true);
 			    PrintWriter pw2 = new PrintWriter(bw2, true)) {
 				pw2.write(year + month + date + hour + min + sec + "\t");
-				pw2.write("100000\t가입을 축하드립니다.\r\n");
+				pw2.write("100000\t가입을\t축하드립니다.\r\n");
 			}
 			
 			response.sendRedirect("success.jsp");

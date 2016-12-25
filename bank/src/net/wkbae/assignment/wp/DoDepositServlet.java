@@ -35,7 +35,7 @@ public class DoDepositServlet extends HttpServlet {
 		    BufferedReader br = new BufferedReader(fr)) {
 			while((readline = br.readLine()) != null) {
 				String[] split = readline.split("\t");
-				account_date = split[0] + "\t";
+				account_date = split[0];
 				account_money = split[1];
 				integer_money = Integer.parseInt(account_money);
 			}
