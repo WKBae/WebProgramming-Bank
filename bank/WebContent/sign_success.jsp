@@ -40,10 +40,20 @@
             Calendar cal = Calendar.getInstance();
             String year = String.valueOf(cal.get(Calendar.YEAR));
             String month = String.valueOf(cal.get(Calendar.MONTH) + 1);
+            if(month.length()==1)
+            	month="0"+month;
             String date = String.valueOf(cal.get(Calendar.DATE));
+            if(date.length()==1)
+            	date="0"+date;
             String hour = String.valueOf(cal.get(Calendar.HOUR_OF_DAY));
+            if(hour.length()==1)
+            	hour="0"+hour;
             String min = String.valueOf(cal.get(Calendar.MINUTE));
+            if(min.length()==1)
+            	min="0"+min;
             String sec = String.valueOf(cal.get(Calendar.SECOND));
+            if(sec.length()==1)
+            	sec="0"+sec;
 
             try (FileWriter bw2 = new FileWriter("c:/bankuser/" + id + "_account.txt", true);
                  PrintWriter pw2 = new PrintWriter(bw2, true)) {
