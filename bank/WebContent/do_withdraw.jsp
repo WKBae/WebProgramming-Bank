@@ -54,7 +54,7 @@ BufferedReader br = new BufferedReader(fr);
     		 PrintWriter pw = new PrintWriter(bw, true)) {
 	
    			 pw.write(year + month + date + hour + min + sec + "\t");
-   			 pw.write((integer_money-Integer.parseInt(output_money)) + "\t" + "출금:" +(Integer.parseInt(output_money)) + "\r\n");
+   			 pw.write((integer_money-Integer.parseInt(output_money)) + "\t" + "출금"+"\t" +(Integer.parseInt(output_money)) + "\r\n");
 		}
 	}
 %>
