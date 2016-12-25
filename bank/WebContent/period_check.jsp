@@ -8,14 +8,15 @@
 <form action="period_week.jsp" method=post>
 <input type="submit" value="1주일">
 </form>
-<br><br>
+<br>
 <form action="period_month.jsp" method=post>
 <input type="submit" value="1개월">
 </form>
-<br><br>
+<br>
 <form action="period_year.jsp" method=post>
 <input type="submit" value="1년">
 </form>
+<br>
 <form action="user_main.jsp" method=post>
 <input type="submit" value="return home">
 </form>

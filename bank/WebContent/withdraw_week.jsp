@@ -5,15 +5,15 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="period_week.jsp" method=post>
+<form action="withdraw_week.jsp" method=post>
 <input type="submit" value="1주일">
 </form>
 <br>
-<form action="period_month.jsp" method=post>
+<form action="withdraw_month.jsp" method=post>
 <input type="submit" value="1개월">
 </form>
 <br>
-<form action="period_year.jsp" method=post>
+<form action="withdraw_year.jsp" method=post>
 <input type="submit" value="1년">
 </form>
 <br>
@@ -45,7 +45,7 @@
 
 
 <table border=1 cellspacing=10 cellpadding=10 width=500>
-<tr><th>No.</th><th>날짜</th><th>입/출금</th><th>입/출금액</th><th>잔액</th></tr>
+<tr><th>No.</th><th>날짜</th><th>출금</th><th>출금액</th><th>잔액</th></tr>
 <%
 	while((readline=br.readLine())!=null){
 		String[] split = readline.split("\t");
@@ -67,13 +67,8 @@
 			day++;
 			temp.add(Calendar.DATE,1);
 		}
-		if(day<=31){
-			if((!de_wi.equals("입금")) && (!de_wi.equals("출금"))){
-				%>
-				<tr><td><%=k %></td><td><%=account_date %></td><td>입금</td><td>100000</td><td>100000</td></tr>
-				<%
-			}
-			else{
+		if(day<=7){
+			if(de_wi.equals("출금")){
 			%>
 		
 				<tr><td><%=k %></td><td><%=account_date %></td><td><%=de_wi %></td><td><%=de_wi_money %></td><td><%=account_money %></td></tr>
