@@ -11,7 +11,7 @@ String readline = "";
 FileReader fr = new FileReader("C:/bankuser/user.txt");
 BufferedReader br = new BufferedReader(fr);
 %>
-<form action="admin_period_check_doing.jsp" method=post>
+<form action="admin_user_infor_doing.jsp" method=post>
 <select name="list1">
 <%
 while((readline=br.readLine())!=null){
@@ -25,12 +25,15 @@ fr.close();
 
 %>	
 </select>
-<br>
-<input type="radio" name="radio" value="1주일" checked>1주일
-<br>
-<input type="radio" name="radio" value="1개월">1개월
-<br>
-<input type="radio" name="radio" value="1년">1년
+
+<select name="list2" size=5>
+<option value="개인정보" selected>개인정보 조회 및 수정</option>
+<option value="접속로그">접속 로그 조회</option>
+<option value="기간">기간별 거래내역 조회</option>
+<option value="입금">입금 내역 조회</option>
+<option value="출금">출금 내역 조뢰</option>
+</select>
+
 <input type="submit" value="확인">
 </form>
 <br>

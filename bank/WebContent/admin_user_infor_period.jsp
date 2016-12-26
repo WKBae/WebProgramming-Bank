@@ -5,26 +5,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%
-String readline = "";
 
-FileReader fr = new FileReader("C:/bankuser/user.txt");
-BufferedReader br = new BufferedReader(fr);
-%>
-<form action="admin_period_check_doing.jsp" method=post>
-<select name="list1">
-<%
-while((readline=br.readLine())!=null){
-	String id=readline;
-	%>
-	<option value=<%=id %>><%=id%></option>
-	<%
-}
-br.close();
-fr.close();
-
-%>	
-</select>
+<form action="admin_user_infor_period_doing.jsp" method=post>
 <br>
 <input type="radio" name="radio" value="1주일" checked>1주일
 <br>
@@ -34,7 +16,7 @@ fr.close();
 <input type="submit" value="확인">
 </form>
 <br>
-<form action="admin_main.jsp" method=post>
+<form action="finish_userinfor.jsp" method=post>
 <input type="submit" value="return home">
 </form>
 </body>

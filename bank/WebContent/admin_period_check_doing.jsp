@@ -26,7 +26,7 @@ ffr.close();
 %>	
 </select>
 <br>
-<input type="radio" name="radio" value="1주일">1주일
+<input type="radio" name="radio" value="1주일" checked>1주일
 <br>
 <input type="radio" name="radio" value="1개월">1개월
 <br>
@@ -57,7 +57,6 @@ ffr.close();
 	int account_day;
 
 	int k=1;
-	if(id!=null && period!=null){
 	FileReader fr = new FileReader("C:/bankuser/"+id+"_account.txt");
 	BufferedReader br = new BufferedReader(fr);
 %>	
@@ -129,10 +128,6 @@ ffr.close();
 	}
 br.close();
 fr.close();
-	}
-	else{%>
-		<jsp:forward page="admin_period_check.jsp" />
-		<%}
 %>
 </table>
 
