@@ -21,7 +21,7 @@ public class DoSignServlet extends HttpServlet {
 		String accountnum = request.getParameter("accountnum");
 		
 		File f = new File("c:/bankuser/" + id + ".txt");
-		if(!f.isFile()) {
+		if(!f.isFile() && !id.equals("admin")) {
 			try(FileOutputStream fos = new FileOutputStream(f);
 			    DataOutputStream dos = new DataOutputStream(fos)) {
 				dos.writeUTF(name);
