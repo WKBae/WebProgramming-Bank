@@ -16,7 +16,7 @@ public class DoLoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		String reqid = request.getParameter("id");
-		String reqpass = request.getParameter("pass");
+		String reqpass = request.getParameter("pass");		
 		
 		File file = new File("c:/bankuser/" + reqid + ".txt");
 		
@@ -27,6 +27,7 @@ public class DoLoginServlet extends HttpServlet {
 				String name = dis.readUTF();
 				String id = dis.readUTF();
 				String pass = dis.readUTF();
+				
 				
 				if(id.equals(reqid) && pass.equals(reqpass)) {
 					Calendar cal = Calendar.getInstance();

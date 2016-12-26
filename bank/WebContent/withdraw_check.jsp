@@ -5,15 +5,19 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="withdraw_week.jsp" method=post>
+<%
+String choose=new String("출금");
+session.setAttribute("mychoose", choose);
+%>
+<form action="period_week.jsp" method=post>
 <input type="submit" value="1주일">
 </form>
 <br>
-<form action="withdraw_month.jsp" method=post>
+<form action="period_month.jsp" method=post>
 <input type="submit" value="1개월">
 </form>
 <br>
-<form action="withdraw_year.jsp" method=post>
+<form action="period_year.jsp" method=post>
 <input type="submit" value="1년">
 </form>
 <br>

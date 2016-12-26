@@ -17,12 +17,13 @@
 <input type="submit" value="1년">
 </form>
 <br>
-<form action="user_main.jsp" method=post>
+<form action="finish_balance_check.jsp" method=post>
 <input type="submit" value="return home">
 </form>
 
 <%
 	String id = (String) session.getAttribute("id");
+	String mychoose=(String)session.getAttribute("mychoose");
 
 	Calendar cal1 = Calendar.getInstance();
 	Calendar cal2 = Calendar.getInstance();
@@ -68,16 +69,46 @@
 			temp.add(Calendar.DATE,1);
 		}
 		if(day<=31){
-			if((!de_wi.equals("입금")) && (!de_wi.equals("출금"))){
+			if(mychoose.equals("기간")){
+				if((!de_wi.equals("입금")) && (!de_wi.equals("출금"))){
+					%>
+					<tr><td><%=k %></td><td><%=account_date %></td><td>입금</td><td>100000</td><td>100000</td></tr>
+					<%
+				}
+				else{
 				%>
-				<tr><td><%=k %></td><td><%=account_date %></td><td>입금</td><td>100000</td><td>100000</td></tr>
-				<%
+			
+					<tr><td><%=k %></td><td><%=account_date %></td><td><%=de_wi %></td><td><%=de_wi_money %></td><td><%=account_money %></td></tr>
+				<%	
+				}
 			}
-			else{
-			%>
-		
-				<tr><td><%=k %></td><td><%=account_date %></td><td><%=de_wi %></td><td><%=de_wi_money %></td><td><%=account_money %></td></tr>
-			<%	
+			else if(mychoose.equals("입금")){
+				if((!de_wi.equals("입금")) && (!de_wi.equals("출금"))){
+					%>
+					<tr><td><%=k %></td><td><%=account_date %></td><td>입금</td><td>100000</td><td>100000</td></tr>
+					<%
+				}
+				else if(de_wi.equals("입금")){
+				%>
+			
+					<tr><td><%=k %></td><td><%=account_date %></td><td><%=de_wi %></td><td><%=de_wi_money %></td><td><%=account_money %></td></tr>
+				<%	
+				}
+				
+			}
+			else if(mychoose.equals("출금")){
+				if((!de_wi.equals("입금")) && (!de_wi.equals("출금"))){
+					%>
+					<tr><td><%=k %></td><td><%=account_date %></td><td>입금</td><td>100000</td><td>100000</td></tr>
+					<%
+				}
+				else if(de_wi.equals("출금")){
+				%>
+			
+					<tr><td><%=k %></td><td><%=account_date %></td><td><%=de_wi %></td><td><%=de_wi_money %></td><td><%=account_money %></td></tr>
+				<%	
+				}
+				
 			}
 		}
 		k++;
@@ -87,9 +118,6 @@ fr.close();
 	
 %>
 </table>
-
-
-
 
 
 </body>

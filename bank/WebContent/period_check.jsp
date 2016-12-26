@@ -5,6 +5,10 @@
 <title>Insert title here</title>
 </head>
 <body>
+<%
+String choose=new String("기간");
+session.setAttribute("mychoose", choose);
+%>
 <form action="period_week.jsp" method=post>
 <input type="submit" value="1주일">
 </form>
