@@ -18,6 +18,10 @@ public class DoLoginServlet extends HttpServlet {
 		String reqid = request.getParameter("id");
 		String reqpass = request.getParameter("pass");		
 		
+		if(reqid.equals("admin") && reqpass.equals("admin")){
+		response.sendRedirect("admin_main.jsp");
+		}
+		else{
 		File file = new File("c:/bankuser/" + reqid + ".txt");
 		
 		if(file.isFile()) {
@@ -61,6 +65,7 @@ public class DoLoginServlet extends HttpServlet {
 		}
 		//request.getRequestDispatcher("/login_failed.jsp").forward(request, response);
 		response.sendRedirect("login_failed.jsp");
+		}
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

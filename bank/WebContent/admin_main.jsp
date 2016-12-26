@@ -1,12 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+         pageEncoding="UTF-8" %>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-
+<form action="admin_period_check.jsp" method=post>
+<input type="submit" value="기간별 입출력 내역 조회">
+</form>
+<br>
+<form action="admin_user_infor.jsp" method=post>
+<input type="submit" value="회원별 정보 조회">
+</form>
+<br>
+<form action="admin_allaccount.jsp" method=post>
+<input type="submit" value="전체 계좌 내역 출력">
+</form>
+<br>
+<form action="admin_user_log.jsp" method=post>
+<input type="submit" value="회원 접속 로그 확인">
+</form>
 </body>
 </html>
