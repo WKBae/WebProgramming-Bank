@@ -26,45 +26,11 @@ public class DoDepositServlet extends HttpServlet {
 			return;
 		}
 		
-		String readline = "";
-		String account_date = "";
-		String account_money = "";
-		int integer_money = 0;
-		
-		try(FileReader fr = new FileReader("C:/bankuser/" + id + "_account.txt");
-		    BufferedReader br = new BufferedReader(fr)) {
-			while((readline = br.readLine()) != null) {
-				String[] split = readline.split("\t");
-				account_date = split[0];
-				account_money = split[1];
-				integer_money = Integer.parseInt(account_money);
-			}
-		}
-		
-		// TODO SimpleDateFormat 사용
-		Calendar cal = Calendar.getInstance();
-		String year = String.valueOf(cal.get(Calendar.YEAR));
-		String month = String.valueOf(cal.get(Calendar.MONTH) + 1);
-		if(month.length() == 1)
-			month = "0" + month;
-		String date = String.valueOf(cal.get(Calendar.DATE));
-		if(date.length() == 1)
-			date = "0" + date;
-		String hour = String.valueOf(cal.get(Calendar.HOUR_OF_DAY));
-		if(hour.length() == 1)
-			hour = "0" + hour;
-		String min = String.valueOf(cal.get(Calendar.MINUTE));
-		if(min.length() == 1)
-			min = "0" + min;
-		String sec = String.valueOf(cal.get(Calendar.SECOND));
-		if(sec.length() == 1)
-			sec = "0" + sec;
-		
-		try(FileWriter bw = new FileWriter("c:/bankuser/" + id + "_account.txt", true);
-		    PrintWriter pw = new PrintWriter(bw, true)) {
-			
-			pw.write(year + month + date + hour + min + sec + "\t");
-			pw.write((in_money + integer_money) + "\t입금\t" + in_money + "\r\n");
+		User user = Users.findUser(id);
+		try {
+			user.deposit(in_money, "입금");
+		} catch(User.NotEnoughBalanceException e) {
+			throw new RuntimeException(e);
 		}
 		
 		//request.getRequestDispatcher("/WEB-INF/jsp/deposit_result.jsp").forward(request, response);
