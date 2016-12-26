@@ -13,7 +13,6 @@ BufferedReader br = new BufferedReader(fr);
 %>
 <form action="admin_period_check_doing.jsp" method=post>
 <select name="list1">
-<option selected value=null>선택</option>
 <%
 while((readline=br.readLine())!=null){
 	String id=readline;

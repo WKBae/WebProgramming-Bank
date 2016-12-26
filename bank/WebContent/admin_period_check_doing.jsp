@@ -13,7 +13,6 @@ BufferedReader fbr = new BufferedReader(ffr);
 %>
 <form action="admin_period_check_doing.jsp" method=post>
 <select name="list1">
-<option selected value=null>선택</option>
 <%
 while((readline=fbr.readLine())!=null){
 	String id=readline;
@@ -35,7 +34,7 @@ ffr.close();
 <input type="submit" value="확인">
 </form>
 <br>
-<form action="admin_period_check_finish.jsp" method=post>
+<form action="admin_main.jsp" method=post>
 <input type="submit" value="return home">
 </form>
 
@@ -43,7 +42,7 @@ ffr.close();
 	request.setCharacterEncoding("UTF-8");
 	String id = (String)request.getParameter("list1");
 	String period=(String)request.getParameter("radio");
-
+	
 	Calendar cal1 = Calendar.getInstance();
 	Calendar cal2 = Calendar.getInstance();
 	
