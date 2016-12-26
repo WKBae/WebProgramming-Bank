@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.WeakHashMap;
 
 /**
  * Created by William on 2016-12-25.
@@ -13,7 +14,7 @@ import java.util.Map;
 public class Users {
 	private Users() {}
 	
-	private static Map<String, User> loadedUsers = new HashMap<>();
+	private static Map<String, User> loadedUsers = new WeakHashMap<>();
 	
 	private static boolean userExists(String id) {
 		return Files.isRegularFile(Paths.get("C:", "bankuser", id + ".txt"));
