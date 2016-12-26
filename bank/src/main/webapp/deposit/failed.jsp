@@ -4,7 +4,7 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
 <c:if test="${empty param.type}">
-    <% response.sendRedirect("/user_main.jsp"); %>
+    <c:redirect url="/user_main.jsp"/>
 </c:if>
 
 <t:userPage title="입금 결과">
