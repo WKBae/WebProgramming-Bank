@@ -97,12 +97,7 @@
 				
 			}
 			else if(mychoose.equals("출금")){
-				if((!de_wi.equals("입금")) && (!de_wi.equals("출금"))){
-					%>
-					<tr><td><%=k %></td><td><%=account_date %></td><td>입금</td><td>100000</td><td>100000</td></tr>
-					<%
-				}
-				else if(de_wi.equals("출금")){
+				if(de_wi.equals("출금")){
 				%>
 			
 					<tr><td><%=k %></td><td><%=account_date %></td><td><%=de_wi %></td><td><%=de_wi_money %></td><td><%=account_money %></td></tr>
