@@ -1,28 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
-<html>
-<head>
-<title>Insert title here</title>
-</head>
-<body>
+<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%
-String choose=new String("기간");
-session.setAttribute("mychoose", choose);
+    session.setAttribute("mychoose", "기간");
 %>
-<form action="period_week.jsp" method=post>
-<input type="submit" value="1주일">
-</form>
-<br>
-<form action="period_month.jsp" method=post>
-<input type="submit" value="1개월">
-</form>
-<br>
-<form action="period_year.jsp" method=post>
-<input type="submit" value="1년">
-</form>
-<br>
-<form action="user_main.jsp" method=post>
-<input type="submit" value="return home">
-</form>
-</body>
-</html>
+<t:userPage title="기간 선택">
+    <jsp:attribute name="body">
+        <form action="period_week.jsp" method="post">
+            <input type="submit" value="1주일">
+        </form>
+        <br>
+        <form action="period_month.jsp" method="post">
+            <input type="submit" value="1개월">
+        </form>
+        <br>
+        <form action="period_year.jsp" method="post">
+            <input type="submit" value="1년">
+        </form>
+        <br>
+        <a href="user_main.jsp" class="btn btn-default">처음 화면으로</a>
+    </jsp:attribute>
+</t:userPage>

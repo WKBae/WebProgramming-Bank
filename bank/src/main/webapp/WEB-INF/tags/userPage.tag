@@ -2,7 +2,6 @@
 
 <%@tag description="Default user page template" pageEncoding="utf-8" %>
 
-<%@attribute name="requireLogin" %>
 <%@attribute name="title" %>
 <%@attribute name="head" fragment="true" %>
 <%@attribute name="body" fragment="true" %>
@@ -22,7 +21,13 @@
     <jsp:invoke fragment="head"/>
 </head>
 <body>
-    <jsp:invoke fragment="body"/>
+    <div class="container" role="main">
+        <div class="row">
+            <div class="col-xs-offset-1 col-xs-10 col-sm-offset-2 col-sm-8 col-md-offset-4 col-md-4">
+                <jsp:invoke fragment="body"/>
+            </div>
+        </div>
+    </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

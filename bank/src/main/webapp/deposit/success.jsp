@@ -1,10 +1,17 @@
+<%@ page import="net.wkbae.assignment.wp.User" %>
+<%@ page import="net.wkbae.assignment.wp.Users" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
 <%
-    // TODO 값을 파일에서 읽어와서 remaining에 저장
-    request.setAttribute("remaining", 10);
+    String id = (String) session.getAttribute("id");
+    User u = Users.findUser(id);
+    if(u == null) {
+    	response.sendRedirect("../index.jsp");
+    	return;
+    }
+    pageContext.setAttribute("remaining", u.getBalance());
 %>
 
 <t:userPage title="입금 결과">
@@ -13,9 +20,7 @@
             <h2>입금 완료</h2>
             <br>
             현재 잔액 : ${remaining}원
-            <form action="../user_main.jsp" method=post>
-                <input type="submit" value="return home">
-            </form>
+            <a href="../user_main.jsp" class="btn btn-primary">처음 화면으로</a>
         </div>
     </jsp:attribute>
 </t:userPage>

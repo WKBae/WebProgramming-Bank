@@ -9,6 +9,6 @@
 session.removeAttribute("id");
 session.removeAttribute("doing");
 %>
- <jsp:forward page="admin_main.jsp" />
+ <jsp:forward page="admin/index.jsp" />
 </body>
 </html>

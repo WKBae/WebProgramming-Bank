@@ -1,44 +1,27 @@
-<%@ page language="java" import="java.io.*" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
-<html>
-<head>
-<title>Insert title here</title>
-</head>
-<body>
-<%
-String id = (String) request.getSession().getAttribute("id");
+<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<t:userCheck/>
 
-FileReader fr = new FileReader("C:/bankuser/"+id+"_account.txt");
-BufferedReader br = new BufferedReader(fr);
+<c:set var="id" value="${sessionScope.id}"/>
+<c:set var="user" value="${Users.findUser(id)}"/>
 
-String readline = "";
-String account_date = "";
-String account_money = "";
-int integer_money = 0;
+<t:userPage title="관리자">
+    <jsp:attribute name="body">
+        현재잔액 : ${user.balance}
 
-while((readline = br.readLine()) != null) {
-	String[] split = readline.split("\t");
-	account_date = split[0];
-	account_money = split[1];
-	integer_money = Integer.parseInt(account_money);
-}
-
-br.close();
-fr.close();
-%>
-현재잔액 : <%=integer_money %>
-
- <br><br>
-                <form method="post" action="period_check.jsp">
-                    <input type="submit" value="기간별 거래 조회">
-                </form>
-                <br>
-                <form method="post" action="deposit_check.jsp">
-                    <input type="submit" value="입금 내역 조회">
-                </form>
-                <br>
-                <form method="post" action="withdraw_check.jsp">
-                    <input type="submit" value="출금 내역 조회">
-                </form>
-</body>
-</html>
+        <br><br>
+        <form method="post" action="period_check.jsp">
+            <input type="submit" value="기간별 거래 조회">
+        </form>
+        <br>
+        <form method="post" action="deposit_check.jsp">
+            <input type="submit" value="입금 내역 조회">
+        </form>
+        <br>
+        <form method="post" action="withdraw_check.jsp">
+            <input type="submit" value="출금 내역 조회">
+        </form>
+    </jsp:attribute>
+</t:userPage>

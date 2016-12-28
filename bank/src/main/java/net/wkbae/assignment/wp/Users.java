@@ -1,12 +1,9 @@
 package net.wkbae.assignment.wp;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.WeakHashMap;
+import java.util.*;
 
 /**
  * Created by William on 2016-12-25.
@@ -14,10 +11,42 @@ import java.util.WeakHashMap;
 public class Users {
 	private Users() {}
 	
-	private static Map<String, User> loadedUsers = new WeakHashMap<>();
+	final static File BASE_DIR = new File("C:/bankuser");
+	
+	private static Map<String, User> loadedUsers;
+	private static Set<String> joinedUsers;
+	
+	static void init() throws IOException {
+		BASE_DIR.mkdirs();
+		User.USER_DIR.mkdir();
+		User.LOG_DIR.mkdir();
+		User.ACCOUNT_DIR.mkdir();
+		
+		loadedUsers = new WeakHashMap<>();
+		
+		joinedUsers = new TreeSet<>();
+		File usersFile = new File(BASE_DIR, "users.txt");
+		if(usersFile.isFile()) {
+			try(BufferedReader br = new BufferedReader(new FileReader(usersFile))) {
+				String user;
+				while((user = br.readLine()) != null) {
+					joinedUsers.add(user);
+				}
+			}
+		}
+	}
+	
+	private static void writeUsers() throws IOException {
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File(BASE_DIR, "users.txt")))) {
+			for(String id : joinedUsers) {
+				bw.write(id);
+				bw.write("\r\n");
+			}
+		}
+	}
 	
 	private static boolean userExists(String id) {
-		return Files.isRegularFile(Paths.get("C:", "bankuser", id + ".txt"));
+		return new File(User.USER_DIR, id + ".txt").isFile();
 	}
 	
 	public synchronized static User findUser(String id) throws IOException {
@@ -49,20 +78,27 @@ public class Users {
 		
 		User user = new User(id, name, pass, accountnum);
 		loadedUsers.put(id, user);
+		joinedUsers.add(id);
+		writeUsers();
 		return user;
 	}
 	
 	public synchronized static boolean removeUser(String id) throws IOException {
-		User u = loadedUsers.remove(id);
-		if(u == null) {
+		if(!joinedUsers.remove(id)) {
 			return false;
 		}
-		Files.deleteIfExists(Paths.get("C:", "bankuser", id + ".txt"));
-		Files.deleteIfExists(Paths.get("C:", "bankuser", id + "_log.txt"));
-		Files.deleteIfExists(Paths.get("C:", "bankuser", id + "_account.txt"));
+		writeUsers();
+		loadedUsers.remove(id);
+		Files.deleteIfExists(User.USER_DIR.toPath().resolve(id + ".txt"));
+		Files.deleteIfExists(User.LOG_DIR.toPath().resolve(id + ".txt"));
+		Files.deleteIfExists(User.ACCOUNT_DIR.toPath().resolve(id + ".txt"));
 		return true;
 	}
 	public synchronized static boolean removeUser(User user) throws IOException {
 		return removeUser(user.getId());
+	}
+	
+	public static Set<String> getUsers() {
+		return Collections.unmodifiableSet(joinedUsers);
 	}
 }

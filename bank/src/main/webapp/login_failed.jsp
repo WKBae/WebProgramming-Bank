@@ -3,8 +3,6 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <t:userPage title="로그인 실패">
     <jsp:attribute name="body">
-        <div class="container" role="main">
-            <a href="index.jsp">로그인 실패</a>
-        </div>
+        <a href="index.jsp">로그인 실패</a>
     </jsp:attribute>
 </t:userPage>

@@ -37,13 +37,26 @@
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jsp-api</artifactId>
+            <version>2.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
         <dependency>
-            <groupId>org.xerial</groupId>
-            <artifactId>sqlite-jdbc</artifactId>
-            <version>3.8.11.2</version>
+            <groupId>org.glassfish</groupId>
+            <artifactId>javax.el</artifactId>
+            <version>3.0.0</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
@@ -82,7 +95,7 @@
                 <configuration>
                     <path>/bank</path>
                     <url>http:// localhost:8080/manager/text</url>
-                    <server>TomcatServer</server>    *(From maven > settings.xml)*
+                    <server>TomcatServer</server>
                     <username>*yourtomcatusername*</username>
                     <password>*yourtomcatpassword*</password>
                 </configuration>

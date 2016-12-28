@@ -1,50 +1,37 @@
-<%@ page language="java" import="java.io.DataInputStream,java.io.FileInputStream" contentType="text/html; charset=UTF-8"
+<%@ page language="java" import="net.wkbae.assignment.wp.User" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
+<%@ page import="net.wkbae.assignment.wp.Users" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<t:userCheck/>
 <%
     String id = (String) session.getAttribute("id");
-    try(FileInputStream fis = new FileInputStream("c:/bankuser/" + id + ".txt")) {
-        DataInputStream dis = new DataInputStream(fis);
-
-        String name = dis.readUTF();
-        id = dis.readUTF();
-        String pass = dis.readUTF();
-        String accountnum = dis.readUTF();
-
-        request.setAttribute("name", name);
-        request.setAttribute("id", id);
-        request.setAttribute("pass", pass);
-        request.setAttribute("accountnum", accountnum);
-    }
+    User u = Users.findUser(id);
+    pageContext.setAttribute("name", u.getName());
+    pageContext.setAttribute("id", u.getId());
+    pageContext.setAttribute("pass", u.getPass());
+    pageContext.setAttribute("accountnum", u.getAccountnum());
 %>
 
 <t:userPage title="개인정보 수정">
     <jsp:attribute name="body">
-        <div class="container" role="main">
-            <div class="row">
-                <div class="col-xs-offset-1 col-xs-10 col-sm-offset-2 col-sm-8 col-md-offset-4 col-md-4">
-
-                    <form name="form1" method="post" action="rewrite_success.jsp">
-                        <div class="form-group">
-                            <label for="name">이름</label>
-                            <input type="text" class="form-control" id="name" name="name" maxlength="10" placeholder="이름" value="${name}">
-                        </div>
-                        <div class="form-group">
-                            <label for="id">아이디 (변경 불가)</label>
-                            <input type="text" class="form-control" id="id" name="id" maxlength="10" placeholder="아이디" value="${id}" disabled>
-                        </div>
-                        <div class="form-group">
-                            <label for="pass">비밀번호</label>
-                            <input type="password" class="form-control" id="pass" name="pass" maxlength="10" placeholder="비밀번호" value="${pass}">
-                        </div>
-                        <div class="form-group">
-                            <label for="accountnum">계좌</label>
-                            <input type="text" class="form-control" id="accountnum" name="accountnum" maxlength="10" placeholder="계좌" value="${accountnum}">
-                        </div>
-                        <button type="submit" class="btn btn-primary">완료</button>
-                    </form>
+            <form name="form1" method="post" action="rewrite_success.jsp">
+                <div class="form-group">
+                    <label for="name">이름</label>
+                    <input type="text" class="form-control" id="name" name="name" maxlength="10" placeholder="이름" value="${name}">
                 </div>
-            </div>
-        </div>
+                <div class="form-group">
+                    <label for="id">아이디 (변경 불가)</label>
+                    <input type="text" class="form-control" id="id" name="id" maxlength="10" placeholder="아이디" value="${id}" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="pass">비밀번호</label>
+                    <input type="password" class="form-control" id="pass" name="pass" maxlength="10" placeholder="비밀번호" value="${pass}">
+                </div>
+                <div class="form-group">
+                    <label for="accountnum">계좌</label>
+                    <input type="text" class="form-control" id="accountnum" name="accountnum" maxlength="10" placeholder="계좌" value="${accountnum}">
+                </div>
+                <button type="submit" class="btn btn-primary">완료</button>
+            </form>
     </jsp:attribute>
 </t:userPage>

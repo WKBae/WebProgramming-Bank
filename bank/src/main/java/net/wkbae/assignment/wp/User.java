@@ -1,22 +1,33 @@
 package net.wkbae.assignment.wp;
 
 import java.io.*;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.*;
 
 /**
  * Created by William on 2016-12-25.
  */
 public class User {
 	
+	final static File USER_DIR = new File(Users.BASE_DIR, "user");
+	final static File LOG_DIR = new File(Users.BASE_DIR, "log");
+	final static File ACCOUNT_DIR = new File(Users.BASE_DIR, "account");
+	
 	private String id;
 	private String name;
 	private String pass;
 	private String accountnum;
+	
+	private TreeSet<Date> loginLog;
+	
+	private TreeSet<Record> records;
 	private long balance;
 	
 	User(String id) throws IOException {
 		this.id = id;
+		this.loginLog = new TreeSet<>();
+		this.records = new TreeSet<>();
 		readFile();
 	}
 	User(String id, String name, String pass, String accountnum) throws IOException {
@@ -24,40 +35,91 @@ public class User {
 		this.name = name;
 		this.pass = pass;
 		this.accountnum = accountnum;
+		this.loginLog = new TreeSet<>();
+		this.records = new TreeSet<>();
 		updateFile();
 	}
 	
 	private void readFile() throws IOException {
-		try(FileInputStream fis = new FileInputStream("c:/bankuser/" + id + ".txt")) {
-			DataInputStream dis = new DataInputStream(fis);
-			
-			name = dis.readUTF();
-			id = dis.readUTF();
-			pass = dis.readUTF();
-			accountnum = dis.readUTF();
+		try(BufferedReader br = new BufferedReader(new FileReader(new File(USER_DIR, id + ".txt")))) {
+			name = br.readLine();
+			id = br.readLine();
+			pass = br.readLine();
+			accountnum = br.readLine();
 		}
 		
-		String balance = "";
+		readLoginLog();
+		readRecords();
+	}
+	
+	private void readLoginLog() throws IOException {
+		SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
 		
-		try(FileReader fr = new FileReader("C:/bankuser/" + id + "_account.txt");
-		    BufferedReader br = new BufferedReader(fr)) {
-			String line = "";
+		try(BufferedReader br = new BufferedReader(new FileReader(new File(LOG_DIR, id + ".txt")))) {
+			String line;
 			while((line = br.readLine()) != null) {
-				String[] split = line.split("\t");
-				balance = split[1];
+				try {
+					loginLog.add(df.parse(line));
+				} catch(ParseException e) {
+					e.printStackTrace();
+				}
+			}
+		} catch (FileNotFoundException ignore) {}
+	}
+	
+	private void saveLoginLog() throws IOException {
+		SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss\r\n");
+		
+		try(BufferedWriter bw = new BufferedWriter(new FileWriter(new File(LOG_DIR, id + ".txt")))) {
+			for(Date log : loginLog) {
+				bw.write(df.format(log));
 			}
 		}
-		this.balance = Long.parseLong(balance);
 	}
+	
+	public void doLogin() throws IOException {
+		loginLog.add(new Date());
+		saveLoginLog();
+	}
+	
+	private void readRecords() throws IOException {
+		try(BufferedReader br = new BufferedReader(new FileReader(new File(ACCOUNT_DIR, id + ".txt")))) {
+			String line = "";
+			while((line = br.readLine()) != null) {
+				try {
+					Record r = Record.from(line);
+					if(r != null) records.add(r);
+				} catch(ParseException|NumberFormatException e) {
+					new Exception("\"" + line + "\" failed to be parsed.", e).printStackTrace();
+				}
+			}
+		} catch (FileNotFoundException ignore) {}
+		try {
+			this.balance = records.last().getBalance();
+		} catch (NoSuchElementException e) {
+			this.balance = 0;
+		}
+	}
+	
+	private void saveRecords() throws IOException {
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File(ACCOUNT_DIR, id + ".txt")))) {
+			for(Record record : records) {
+				bw.write(record.toString());
+				bw.write("\r\n");
+			}
+		}
+	}
+	
 	private void updateFile() throws IOException {
-		try (FileOutputStream fos = new FileOutputStream("c:/bankuser/" + id + ".txt");
-		     DataOutputStream dos = new DataOutputStream(fos)) {
-			
-			dos.writeUTF(name);
-			dos.writeUTF(id);
-			dos.writeUTF(pass);
-			dos.writeUTF(accountnum);
-			fos.write('\n');
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File(USER_DIR, id + ".txt")))) {
+			bw.write(name);
+			bw.write("\r\n");
+			bw.write(id);
+			bw.write("\r\n");
+			bw.write(pass);
+			bw.write("\r\n");
+			bw.write(accountnum);
+			bw.write("\r\n");
 		}
 	}
 	
@@ -97,15 +159,6 @@ public class User {
 		updateFile();
 	}
 	
-	public void logSignIn() throws IOException {
-		SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss\r\n"); // yyyyMMddHHmmssSSS
-		
-		try(FileWriter bw = new FileWriter("c:/bankuser/" + id + "_log.txt", true);
-		    PrintWriter pw = new PrintWriter(bw, true)) {
-			pw.write(df.format(new Date()));
-		}
-	}
-	
 	public long getBalance() {
 		return balance;
 	}
@@ -116,7 +169,8 @@ public class User {
 		}
 		
 		balance += amount;
-		logBalanceChange(amount, message);
+		records.add(new Record(this, amount, message));
+		saveRecords();
 		return balance;
 	}
 	public long withdraw(long amount, String message) throws NotEnoughBalanceException, IOException {
@@ -127,39 +181,24 @@ public class User {
 			throw new NotEnoughBalanceException("Balance " + balance + " is not enough to withdraw " + amount);
 		
 		balance -= amount;
-		logBalanceChange(-amount, message);
+		records.add(new Record(this, -amount, message));
+		saveRecords();
 		return balance;
 	}
 	
+	public SortedSet<Record> getRecords() {
+		return Collections.unmodifiableSortedSet(records);
+	}
+	
+	public SortedSet<Date> getLoginLog() {
+		return Collections.unmodifiableSortedSet(loginLog);
+	}
 	public static class NotEnoughBalanceException extends Exception {
 		public NotEnoughBalanceException() {
 		}
 		
 		public NotEnoughBalanceException(String message) {
 			super(message);
-		}
-	}
-	
-	private void logBalanceChange(long amount, String message) throws IOException {
-		SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss\r\n"); // yyyyMMddHHmmssSSS
-		
-		StringBuilder sb = new StringBuilder();
-		sb.append(df.format(new Date()));
-		sb.append('\t');
-		sb.append(balance);
-		if(amount >= 0) {
-			sb.append("\t입금\t");
-			sb.append(amount);
-		} else {
-			sb.append("\t출금\t");
-			sb.append(-amount);
-		}
-		sb.append("\r\n");
-		
-		try(FileWriter bw = new FileWriter("c:/bankuser/" + id + "_account.txt", true);
-		    PrintWriter pw = new PrintWriter(bw, true)) {
-			
-			pw.write(sb.toString());
 		}
 	}
 	

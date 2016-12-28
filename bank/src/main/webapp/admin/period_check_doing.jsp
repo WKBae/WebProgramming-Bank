@@ -1,35 +1,41 @@
-<%@ page language="java"
-         import="net.wkbae.assignment.wp.Record,net.wkbae.assignment.wp.User,net.wkbae.assignment.wp.Users"
+<%@ page language="java" import="net.wkbae.assignment.wp.Record, net.wkbae.assignment.wp.User"
          contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
+<%@ page import="net.wkbae.assignment.wp.Users" %>
+<%@ page import="java.io.BufferedReader" %>
+<%@ page import="java.io.FileReader" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Calendar" %>
 <%@ page import="java.util.Date" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
-<t:userCheck/>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<t:adminCheck/>
 <html>
 <head>
-    <title>사용자 정보</title>
+    <title>Insert title here</title>
 </head>
 <body>
-    <form action="period_week.jsp" method="post">
-        <input type="submit" value="1주일">
+    <form action="period_check_doing.jsp" method="post">
+        <select name="list1">
+            <c:forEach var="id" items="${Users.getUsers()}">
+                <option value="${id}">${id}</option>
+            </c:forEach>
+        </select>
+        <br>
+        <input type="radio" name="radio" value="1주일" id="rad-week" checked><label for="rad-week">1주일</label>
+        <br>
+        <input type="radio" name="radio" value="1개월" id="rad-month"><label for="rad-month">1개월</label>
+        <br>
+        <input type="radio" name="radio" value="1년" id="rad-year"><label for="rad-year">1년</label>
+        <input type="submit" class="btn btn-primary" value="확인">
     </form>
     <br>
-    <form action="period_month.jsp" method="post">
-        <input type="submit" value="1개월">
-    </form>
-    <br>
-    <form action="period_year.jsp" method="post">
-        <input type="submit" value="1년">
-    </form>
-    <br>
-    <a href="user_main.jsp" class="btn btn-default">처음 화면으로</a>
+    <a href="index.jsp" class="btn btn-default">처음 화면으로</a>
 
     <%
-        String id = (String) session.getAttribute("id");
-        String mychoose = (String) session.getAttribute("mychoose");
+        request.setCharacterEncoding("UTF-8");
+        String id = (String) request.getParameter("list1");
+        String period = (String) request.getParameter("radio");
 
         Calendar cal1 = Calendar.getInstance();
         Calendar cal2 = Calendar.getInstance();
@@ -69,14 +75,13 @@
                     day++;
                     temp.add(Calendar.DATE, 1);
                 }
-                if(day <= 31) {
-                    if(mychoose.equals("기간")) {
-                        if((!de_wi.equals("입금")) && (!de_wi.equals("출금"))) {
+                if(day <= 7 && period.equals("1주일")) {
+                    if((!de_wi.equals("입금")) && (!de_wi.equals("출금"))) {
         %>
         <tr>
             <td><%=k %>
             </td>
-            <td><%=df.format(account_date) %>
+            <td><%= df.format(account_date) %>
             </td>
             <td>입금</td>
             <td>100000</td>
@@ -89,7 +94,7 @@
         <tr>
             <td><%=k %>
             </td>
-            <td><%=df.format(account_date) %>
+            <td><%= df.format(account_date) %>
             </td>
             <td><%=de_wi %>
             </td>
@@ -100,26 +105,26 @@
         </tr>
         <%
             }
-        } else if(mychoose.equals("입금")) {
+        } else if(day <= 31 && period.equals("1개월")) {
             if((!de_wi.equals("입금")) && (!de_wi.equals("출금"))) {
         %>
         <tr>
             <td><%=k %>
             </td>
-            <td><%=df.format(account_date) %>
+            <td><%= df.format(account_date) %>
             </td>
             <td>입금</td>
             <td>100000</td>
             <td>100000</td>
         </tr>
         <%
-        } else if(de_wi.equals("입금")) {
+        } else {
         %>
 
         <tr>
             <td><%=k %>
             </td>
-            <td><%=df.format(account_date) %>
+            <td><%= df.format(account_date) %>
             </td>
             <td><%=de_wi %>
             </td>
@@ -130,15 +135,26 @@
         </tr>
         <%
             }
-
-        } else if(mychoose.equals("출금")) {
-            if(de_wi.equals("출금")) {
+        } else if(day <= 365 && period.equals("1년")) {
+            if((!de_wi.equals("입금")) && (!de_wi.equals("출금"))) {
+        %>
+        <tr>
+            <td><%=k %>
+            </td>
+            <td><%= df.format(account_date) %>
+            </td>
+            <td>입금</td>
+            <td>100000</td>
+            <td>100000</td>
+        </tr>
+        <%
+        } else {
         %>
 
         <tr>
             <td><%=k %>
             </td>
-            <td><%=df.format(account_date) %>
+            <td><%= df.format(account_date) %>
             </td>
             <td><%=de_wi %>
             </td>
@@ -148,13 +164,10 @@
             </td>
         </tr>
         <%
-                        }
-
                     }
                 }
                 k++;
             }
-
         %>
     </table>
 

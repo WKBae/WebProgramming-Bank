@@ -10,10 +10,11 @@ import java.io.*;
 /**
  * Created by William on 2016-12-25.
  */
-@WebServlet(name = "DoLoginServlet", urlPatterns = "/logout.do")
+@WebServlet(name = "DoLogoutServlet", urlPatterns = "/logout.do")
 public class DoLogoutServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getSession().removeAttribute("id");
+		request.getSession().removeAttribute("admin");
 		response.sendRedirect("index.jsp");
 	}
 	

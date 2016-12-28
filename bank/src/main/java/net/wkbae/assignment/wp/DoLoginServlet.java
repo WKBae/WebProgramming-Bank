@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.util.Calendar;
 
 /**
  * Created by William on 2016-12-25.
@@ -19,19 +18,20 @@ public class DoLoginServlet extends HttpServlet {
 		String reqpass = request.getParameter("pass");		
 		
 		if(reqid.equals("admin") && reqpass.equals("admin")){
-		response.sendRedirect("admin_main.jsp");
-		}
-		else{
+			request.getSession().setAttribute("admin", true);
+			response.sendRedirect("admin/index.jsp");
+		} else{
 			User user = Users.findUser(reqid);
 			if(user != null) {
 				if(user.getId().equals(reqid) && user.getPass().equals(reqpass)) {
-					user.logSignIn();
+					user.doLogin();
 					request.getSession().setAttribute("id", reqid);
 					response.sendRedirect("user_main.jsp");
+					return;
 				}
 			}
-		//request.getRequestDispatcher("/login_failed.jsp").forward(request, response);
-		response.sendRedirect("login_failed.jsp");
+			//request.getRequestDispatcher("/login_failed.jsp").forward(request, response);
+			response.sendRedirect("login_failed.jsp");
 		}
 	}
 	

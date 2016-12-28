@@ -27,11 +27,6 @@ public class DoSignServlet extends HttpServlet {
 		
 		User user = Users.createUser(id, name, pass, accountnum);
 		if(user != null) {
-			try(FileWriter bw = new FileWriter("c:/bankuser/user.txt", true);
-			    PrintWriter pw = new PrintWriter(bw, true)) {
-				pw.write(id + "\r\n");
-			}
-			
 			try {
 				user.deposit(100000, "가입을 축하드립니다.");
 			} catch(User.NotEnoughBalanceException ignored) {}
